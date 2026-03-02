@@ -161,6 +161,7 @@ class State(object):
         iteration: int,
         gsd_period: int,
         backup_trajectories: bool = False,
+        sample_snap = None,
     ) -> None:
         """Runs HOOMD-Blue query simulations.
 
@@ -171,7 +172,9 @@ class State(object):
         print(f"Starting simulation {iteration} for state {self}")
         print(f"Running on device {device}")
 
-        with gsd.hoomd.open(self.traj_file, "r") as traj:
+        # if sample_snap is provided, initialize from that snapshot
+        traj_to_use = sample_snap if sample_snap else self.traj_file
+        with gsd.hoomd.open(traj_to_use, "r") as traj:
             last_snap = traj[-1]
         sim.create_state_from_snapshot(last_snap)
         integrator = hoomd.md.Integrator(dt=dt)
@@ -196,8 +199,10 @@ class State(object):
         sim.run(n_steps)
         gsd_writer.flush()
         if backup_trajectories:
+            # Backup trajectory nomenclature depends on whether sampling from specified start state 
+            backup_fname = f"sample{iteration}.gsd" if sample_snap else f"query{iteration}.gsd"
             shutil.copy(
-                self.query_traj, os.path.join(self.dir, f"query{iteration}.gsd")
+                self.query_traj, os.path.join(self.dir, backup_fname)
             )
         print(f"Finished simulation {iteration} for state {self}")
         print()
