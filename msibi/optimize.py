@@ -194,13 +194,36 @@ class MSIBI(object):
                     thermostat_kwargs=self.thermostat_kwargs,
                     dt=self.dt,
                     seed=self.seed,
-                    iteration=self.n_iterations,
+                    iteration=self.n,
                     gsd_period=self.gsd_period,
                     backup_trajectories=backup_trajectories,
                 )
             self._update_potentials()
             self.n_iterations += 1
 
+    def sample_trajs(self, snapfile_list, n_steps) -> list[str]:
+        """Sample trajectories of length nsteps for each snapshot file in snapfile_list."""
+        traj_files = []
+        it = 0
+        for snapfile in snapfile_list:
+            state._run_simulation(
+                n_steps=n_steps,
+                forces=forces,
+                integrator_method=self.integrator_method,
+                method_kwargs=self.method_kwargs,
+                thermostat=self.thermostat,
+                thermostat_kwargs=self.thermostat_kwargs,
+                dt=self.dt,
+                seed=self.seed,
+                iteration=it,
+                gsd_period=self.gsd_period,
+                backup_trajectories=True,
+                sample_snap = snapfile
+            )
+            traj_files.append(os.path.join(state.dir, f"sample{it}.gsd")
+            it += 1
+        return traj_files
+    
     def pickle_forces(self, file_path: str) -> None:
         """Save the HOOMD-Blue force objects for all forces to a single pickle file.
 
