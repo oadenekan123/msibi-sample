@@ -206,7 +206,7 @@ class MSIBI(object):
         traj_files = []
         it = 0
         for snapfile in snapfile_list:
-            for state in self.states
+            for state in self.states:
                 state._run_simulation(
                     n_steps=n_steps,
                     forces=forces,
