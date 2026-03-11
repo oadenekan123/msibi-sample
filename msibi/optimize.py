@@ -194,7 +194,7 @@ class MSIBI(object):
                     thermostat_kwargs=self.thermostat_kwargs,
                     dt=self.dt,
                     seed=self.seed,
-                    iteration=self.n,
+                    iteration=self.n_iterations,
                     gsd_period=self.gsd_period,
                     backup_trajectories=backup_trajectories,
                 )
