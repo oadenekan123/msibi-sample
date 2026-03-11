@@ -203,6 +203,7 @@ class MSIBI(object):
 
     def sample_trajs(self, snapfile_list, n_steps) -> list[str]:
         """Sample trajectories of length nsteps for each snapshot file in snapfile_list."""
+        forces = self._build_force_objects()
         traj_files = []
         it = 0
         for snapfile in snapfile_list:
