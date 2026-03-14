@@ -206,24 +206,24 @@ class MSIBI(object):
         forces = self._build_force_objects()
         traj_files = []
         it = 0
-        for snapfile in snapfile_list:
-            for state in self.states:
-                state._run_simulation(
-                    n_steps=n_steps,
-                    forces=forces,
-                    integrator_method=self.integrator_method,
-                    method_kwargs=self.method_kwargs,
-                    thermostat=self.thermostat,
-                    thermostat_kwargs=self.thermostat_kwargs,
-                    dt=self.dt,
-                    seed=self.seed,
-                    iteration=it,
-                    gsd_period=self.gsd_period,
-                    backup_trajectories=False,
-                    sample_snap = snapfile
-                )
-                traj_files.append(os.path.join(state.dir, f"sample{it}.gsd"))
-            it += 1
+        #for snapfile in snapfile_list:
+            #for state in self.states:
+        self.states[-1]._run_simulation(
+            n_steps=n_steps,
+            forces=forces,
+            integrator_method=self.integrator_method,
+            method_kwargs=self.method_kwargs,
+            thermostat=self.thermostat,
+            thermostat_kwargs=self.thermostat_kwargs,
+            dt=self.dt,
+            seed=self.seed,
+            iteration=it,
+            gsd_period=self.gsd_period,
+            backup_trajectories=False,
+            sample_snap = snapfile
+        )
+        traj_files.append(os.path.join(state.dir, f"sample{it}.gsd"))
+        it += 1
         return traj_files
     
     def pickle_forces(self, file_path: str) -> None:
