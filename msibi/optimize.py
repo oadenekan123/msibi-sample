@@ -220,7 +220,7 @@ class MSIBI(object):
             iteration=it,
             gsd_period=self.gsd_period,
             backup_trajectories=False,
-            sample_snap = snapfile
+            sample_snap = snapfile_list[0]
         )
         traj_files.append(os.path.join(state.dir, f"sample{it}.gsd"))
         it += 1
