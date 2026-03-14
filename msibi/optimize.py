@@ -4,6 +4,8 @@ import hoomd
 
 import msibi
 
+import os
+
 
 class MSIBI(object):
     """Management class for orchestrating an MSIBI optimization run.
