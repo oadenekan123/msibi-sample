@@ -1158,7 +1158,7 @@ class Pair(Force):
             B_name=self.type2,
             r_min=self.x_min,
             r_max=self.r_cut,
-            exclude_bonded=state.exclude_bonded,
+            exclude_all_bonded=state.exclude_bonded,
             start=-state.n_frames,
             stride=state.sampling_stride,
             stop=-1,
