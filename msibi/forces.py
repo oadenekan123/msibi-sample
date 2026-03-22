@@ -644,8 +644,9 @@ class Force:
                 polyorder=self.smoothing_order,
                 deriv=0,
             )
-            negative_idx = np.where(distribution[:, 1] < 0)[0]
-            distribution[:, 1][negative_idx] = 0
+            #negative_idx = np.where(distribution[:, 1] < 0)[0]
+            negative_idx = np.where(distribution[:, 1] <= 0)[0]
+            distribution[:, 1][negative_idx] = 1e-6
         self._states[state]["current_distribution"] = distribution
 
         f_fit = calc_similarity(
