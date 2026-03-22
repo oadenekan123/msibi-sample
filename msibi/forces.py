@@ -699,7 +699,7 @@ class Force:
             self._potential += alpha_array * (
                 state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N
             )
-            print("shape of current distribution: {}, shape of target distribution: {}") 
+            print("shape of current distribution: {}, shape of target distribution: {}".format(current_dist.shape, target_dist.shape)) 
         # Apply corrections to regions without distribution overlap
         if isinstance(self, msibi.forces.Pair):
             self._potential, head_cut, tail_cut, real_indices = pair_corrections(
