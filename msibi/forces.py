@@ -698,8 +698,10 @@ class Force:
             self._states[state]["distribution_history"].append(current_dist)
             N = len(self._states)
             alpha_array = state.alpha(pot_x_range=self.x_range, dx=self.dx)
+            zero_indices = np.where(target_dist[:, 1] <= 0)[0]
+            target_dist[:, 1][zero_indices] = np.random.random(len(zero_indices)) * 1e-3
             self._potential += alpha_array * (
-                state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N
+                state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N 
             )
             print("shape of current distribution: {}, shape of target distribution: {}".format(current_dist.shape, target_dist.shape)) 
         # Apply corrections to regions without distribution overlap
