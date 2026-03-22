@@ -698,10 +698,10 @@ class Force:
             self._states[state]["distribution_history"].append(current_dist)
             N = len(self._states)
             alpha_array = state.alpha(pot_x_range=self.x_range, dx=self.dx)
-            print(target_dist)
-            zero_indices = np.where(target_dist[:, 1] <= 0)[0]
-            target_dist[:, 1][zero_indices] = np.random.random(len(zero_indices)) * 1e-3
-            print(target_dist)
+            #print(target_dist)
+            #zero_indices = np.where(target_dist[:, 1] <= 0)[0]
+            #target_dist[:, 1][zero_indices] = np.random.random(len(zero_indices)) * 1e-3
+            #print(target_dist)
             self._potential += alpha_array * (
                 state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N 
             )
