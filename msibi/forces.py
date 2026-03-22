@@ -321,7 +321,8 @@ class Force:
         """
         if not self.optimize:
             raise PotentialNotOptimizedError("plot a distribution history")
-        target_distribution = self._get_state_distribution(state=state, query=False)
+        #target_distribution = self._get_state_distribution(state=state, query=False)
+        target_distribution = self.target_distribution(state=state)
         plt.title(f"State {state.name}: {self.name} Target")
         plt.ylabel("P(x)")
         plt.xlabel("x")
@@ -606,7 +607,8 @@ class Force:
             Instance of a State object previously created.
         """
         if self.optimize:
-            target_distribution = self._get_state_distribution(state=state, query=False)
+            #target_distribution = self._get_state_distribution(state=state, query=False)
+            target_distribution = self.target_distribution(state=state)
             if self.smoothing_window and self.smoothing_order:
                 target_distribution[:, 1] = savgol_filter(
                     x=target_distribution[:, 1],
