@@ -702,8 +702,8 @@ class Force:
             #print(target_dist)
             #zero_indices = np.where(target_dist[:, 1] <= 0)[0]
             #target_dist[:, 1][zero_indices] = np.random.random(len(zero_indices)) * 1e-3
-            print(current_dist)
-            print(target_dist)
+            #print(current_dist)
+            #print(target_dist)
             #print(list(zip(current_dist, target_dist)))
             self._potential += alpha_array * (
                 state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N 
