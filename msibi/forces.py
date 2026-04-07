@@ -694,6 +694,7 @@ class Force:
     def _update_potential(self) -> None:
         """Compare distributions and update potential via Boltzmann Inversion."""
         for state in self._states:
+            print('just print something when i get here, man')
             current_dist = self._states[state]["current_distribution"]
             target_dist = self._states[state]["target_distribution"]
             self._states[state]["distribution_history"].append(current_dist)
@@ -705,7 +706,9 @@ class Force:
             #print(current_dist)
             #print(target_dist)
             #print(list(zip(current_dist, target_dist)))
+            print('before edit:', [current_dist[:, 1])
             current_dist[:, 1][current_dist[:, 1] == 0] = 1e-5
+            print('after edit:', [current_dist[:, 1])
             self._potential += alpha_array * (
                 state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N 
             )
