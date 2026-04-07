@@ -706,9 +706,9 @@ class Force:
             #print(current_dist)
             #print(target_dist)
             #print(list(zip(current_dist, target_dist)))
-            print('before edit:', [current_dist[:, 1])
+            print('before edit:', current_dist[:, 1])
             current_dist[:, 1][current_dist[:, 1] == 0] = 1e-5
-            print('after edit:', [current_dist[:, 1])
+            print('after edit:', current_dist[:, 1])
             self._potential += alpha_array * (
                 state.kT * np.log(current_dist[:, 1] / target_dist[:, 1]) / N 
             )
